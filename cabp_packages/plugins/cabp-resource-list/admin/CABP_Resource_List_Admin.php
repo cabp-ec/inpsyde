@@ -70,21 +70,16 @@ class CABP_Resource_List_Admin {
 	 * Admin page content
 	 */
 	public function create_admin_page_callback() {
-		$this->rlist_options = get_option( 'cabp_option' ); ?>
+	  $defaults = array(
+		  'rlist_protocol' => CABP_RESOURCE_LIST_PROTOCOL,
+		  'rlist_api_base' => CABP_RESOURCE_LIST_HOST,
+		  'rlist_resource' => CABP_RESOURCE_LIST_RESOURCE,
+		  'rlist_detail' => CABP_RESOURCE_LIST_DETAIL,
+	  );
 
-      <div class="wrap">
-        <h2>CABP Resource List</h2>
-        <p></p>
-		  <?php settings_errors(); ?>
-        <form method="post" action="options.php">
-			<?php
-			settings_fields( 'cabp_option_group' );
-			do_settings_sections( CABP_RESOURCE_LIST_SLUG_ADMIN );
-			submit_button();
-			?>
-        </form>
-      </div>
-		<?php
+		$this->rlist_options = wp_parse_args(get_option('cabp_option'), $defaults);
+//		$this->rlist_options = get_option( 'cabp_option' );
+	  include_once dirname( __FILE__ ) . '/partials/page_content.php';
 	}
 
 	/**

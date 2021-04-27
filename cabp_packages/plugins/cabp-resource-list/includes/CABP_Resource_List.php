@@ -94,7 +94,6 @@ class CABP_Resource_List
         $this->plugin_public = new CABP_Resource_List_Public($this->get_plugin_name(), $this->get_version());
         $this->define_admin_hooks();
         $this->define_public_hooks();
-        $this->define_short_codes();
     }
 
     /**
@@ -155,17 +154,6 @@ class CABP_Resource_List
         $plugin_i18n = new CABP_Resource_List_i18n();
         $plugin_i18n->set_domain($this->get_plugin_name());
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
-    }
-
-    /**
-     * Register all of the shortcodes.
-     *
-     * @since    1.0.0
-     * @access   private
-     */
-    private function define_short_codes()
-    {
-        add_shortcode('cabp_rlist', array($this->plugin_public, 'shortcode_cb'));
     }
 
     /**

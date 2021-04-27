@@ -29,6 +29,10 @@ define( 'CABP_RESOURCE_LIST_BASENAME', basename( dirname( __FILE__ ) ) );
 define( 'CABP_RESOURCE_LIST_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
 define( 'CABP_RESOURCE_LIST_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
 define( 'CABP_RESOURCE_LIST_POST_TYPE_CTA', 'cabp_rlist' );
+define( 'CABP_RESOURCE_LIST_PROTOCOL', 'https' );
+define( 'CABP_RESOURCE_LIST_HOST', 'jsonplaceholder.typicode.com' );
+define( 'CABP_RESOURCE_LIST_RESOURCE', 'users' );
+define( 'CABP_RESOURCE_LIST_DETAIL', 'albums' );
 
 /**
  * Code that runs during plugin activation.

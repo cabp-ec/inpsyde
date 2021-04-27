@@ -4,8 +4,42 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2909169ea0bc3404086bd50b5a3f8f8",
+    "content-hash": "c639f3137330f200532af4cc73a6b62a",
     "packages": [
+        {
+            "name": "cabp/resource-list",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./cabp_packages/plugins/cabp-resource-list",
+                "reference": "6f1749048f0226b8e99c260a0019d138ba0ae540"
+            },
+            "require": {
+                "composer/installers": "^1.10",
+                "php": ">=7.4.11"
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos Bucheli",
+                    "email": "cabp@carlos-bucheli.com",
+                    "homepage": "http://www.carlos-bucheli.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "JSON Resource List Plugin.",
+            "homepage": "https://www.carlos-bucheli.com",
+            "keywords": [
+                "composer",
+                "wordpress"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
         {
             "name": "composer/installers",
             "version": "v1.10.0",

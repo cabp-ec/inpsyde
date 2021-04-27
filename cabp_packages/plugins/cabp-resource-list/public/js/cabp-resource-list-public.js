@@ -30,12 +30,10 @@
       modal.dialog( 'option', 'position', { my: 'center top', at: 'center top', of: window } );
       modal.dialog('open');
 
-      $.post(ajax_object.ajax_url, data, (response) => {
-        console.clear();
-        console.log(response);
-
-        const status = Number(response.status);
-        const context = JSON.parse(response.data);
+      $.post(ajax_object.ajax_url, data, (response_body) => {
+        const response = JSON.parse(response_body);
+        const status = response.status;
+        const context = response.data;
         let content;
 
         if (200 === status) {
