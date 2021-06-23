@@ -39,7 +39,7 @@
     "roots/wordpress": "5.7.1",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.0.0",
-    "cabp/resource-list": "*"
+    "cabp/resource-list": "dev-main"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.5.8",

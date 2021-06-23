@@ -9,6 +9,8 @@
  * @subpackage CABP_Resource_List/public
  */
 
+namespace Cabp\ResourceList\_Public;
+
 /**
  * The public-facing functionality of the plugin.
  *

@@ -12,6 +12,11 @@
  * @subpackage CABP_Resource_List/includes
  */
 
+namespace Cabp\ResourceList;
+
+use Cabp\ResourceList\Admin\CABP_Resource_List_Admin;
+use Cabp\ResourceList\_Public\CABP_Resource_List_Public;
+
 /**
  * The core plugin class.
  *
@@ -118,24 +123,24 @@ class CABP_Resource_List
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/CABP_Resource_List_Loader.php';
+//        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/CABP_Resource_List_Loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/CABP_Resource_List_i18n.php';
+//        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/CABP_Resource_List_i18n.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/CABP_Resource_List_Admin.php';
+//        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/CABP_Resource_List_Admin.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/CABP_Resource_List_Public.php';
+//        require_once plugin_dir_path(dirname(__FILE__)) . 'public/CABP_Resource_List_Public.php';
 
         $this->loader = new CABP_Resource_List_Loader();
     }

@@ -9,6 +9,8 @@
  * @subpackage CABP_Resource_List/includes
  */
 
+namespace Cabp\ResourceList;
+
 /**
  * Fired during plugin activation.
  *
@@ -23,9 +25,9 @@ class CABP_Resource_List_Activator
 {
 
 	/**
-	 * Short Description. (use period)
+	 * Activate the plugin.
 	 *
-	 * Long Description.
+	 * Remove rewrite rules and then recreate rewrite rules.
 	 *
 	 * @since    1.0.0
 	 */

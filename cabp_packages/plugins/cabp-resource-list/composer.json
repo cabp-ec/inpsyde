@@ -19,5 +19,12 @@
   "require": {
     "php": ">=7.4.11",
     "composer/installers": "^1.10"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cabp\\ResourceList\\": "includes",
+      "Cabp\\ResourceList\\Admin\\": "admin",
+      "Cabp\\ResourceList\\_Public\\": "public"
+    }
   }
 }

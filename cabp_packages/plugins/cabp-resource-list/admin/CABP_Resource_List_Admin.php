@@ -9,6 +9,8 @@
  * @subpackage CABP_Resource_List/admin
  */
 
+namespace Cabp\ResourceList\Admin;
+
 /**
  * The admin-specific functionality of the plugin.
  *

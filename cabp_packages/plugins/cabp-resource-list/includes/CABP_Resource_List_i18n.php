@@ -12,6 +12,8 @@
  * @subpackage CABP_Resource_List/includes
  */
 
+namespace Cabp\ResourceList;
+
 /**
  * Define the internationalization functionality.
  *

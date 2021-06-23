@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c639f3137330f200532af4cc73a6b62a",
+    "content-hash": "28467e817b6c3666289313ad303ca03d",
     "packages": [
         {
             "name": "cabp/resource-list",
@@ -12,13 +12,20 @@
             "dist": {
                 "type": "path",
                 "url": "./cabp_packages/plugins/cabp-resource-list",
-                "reference": "6f1749048f0226b8e99c260a0019d138ba0ae540"
+                "reference": "cd9a38814347f84b399d0f0452c5777d1a8085d2"
             },
             "require": {
                 "composer/installers": "^1.10",
                 "php": ">=7.4.11"
             },
             "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Cabp\\ResourceList\\": "includes",
+                    "Cabp\\ResourceList\\Admin\\": "admin",
+                    "Cabp\\ResourceList\\_Public\\": "public"
+                }
+            },
             "license": [
                 "proprietary"
             ],
@@ -1416,6 +1423,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "cabp/resource-list": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

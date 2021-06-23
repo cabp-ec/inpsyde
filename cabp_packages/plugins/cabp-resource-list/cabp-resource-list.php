@@ -33,13 +33,19 @@ define( 'CABP_RESOURCE_LIST_PROTOCOL', 'https' );
 define( 'CABP_RESOURCE_LIST_HOST', 'jsonplaceholder.typicode.com' );
 define( 'CABP_RESOURCE_LIST_RESOURCE', 'users' );
 define( 'CABP_RESOURCE_LIST_DETAIL', 'albums' );
+define('BASE_PATH', plugin_dir_path(__FILE__));
+
+require BASE_PATH . 'vendor/autoload.php';
+
+use Cabp\ResourceList\CABP_Resource_List_Activator;
+use Cabp\ResourceList\CABP_Resource_List_Deactivator;
+use Cabp\ResourceList\CABP_Resource_List;
 
 /**
  * Code that runs during plugin activation.
  * This action is documented in includes/class-cabp-resource-list-activator.php
  */
 function activate_cabp_resource_list() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/CABP_Resource_List_Activator.php';
 	CABP_Resource_List_Activator::activate();
 }
 
@@ -48,18 +54,11 @@ function activate_cabp_resource_list() {
  * This action is documented in includes/class-cabp-resource-list-deactivator.php
  */
 function deactivate_cabp_resource_list() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/CABP_Resource_List_Deactivator.php';
 	CABP_Resource_List_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_cabp_resource_list' );
 register_deactivation_hook( __FILE__, 'deactivate_cabp_resource_list' );
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/CABP_Resource_List.php';
 
 /**
  * Begins execution of the plugin.

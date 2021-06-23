@@ -9,6 +9,8 @@
  * @subpackage CABP_Resource_List/includes
  */
 
+namespace Cabp\ResourceList;
+
 /**
  * Fired during plugin deactivation.
  *
@@ -23,9 +25,9 @@ class CABP_Resource_List_Deactivator
 {
 
     /**
-     * Short Description. (use period)
+     * Deactivate the plugin.
      *
-     * Long Description.
+     * Remove the options page then remove rewrite rules and then recreate rewrite rules.
      *
      * @since    1.0.0
      */
