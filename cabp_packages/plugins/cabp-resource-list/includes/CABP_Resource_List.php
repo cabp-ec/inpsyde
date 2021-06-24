@@ -79,70 +79,51 @@ class CABP_Resource_List
      */
     protected $plugin_public;
 
-    /**
-     * Define the core functionality of the plugin.
-     *
-     * Set the plugin name and the plugin version that can be used throughout the plugin.
-     * Load the dependencies, define the locale, and set the hooks for the admin area and
-     * the public-facing side of the site.
-     *
-     * @since    1.0.0
-     */
-    public function __construct()
-    {
-        $this->plugin_name = CABP_RESOURCE_LIST_SLUG;
-        $this->version = CABP_RESOURCE_LIST_VERSION;
+	/**
+	 * @var CABP_Resource_List_Admin
+	 */
+	private $admin;
+	/**
+	 * @var CABP_Resource_List_Public
+	 */
+	private $public;
+	/**
+	 * @var CABP_Resource_List_i18n
+	 */
+	private $i_18_n;
 
-        $this->load_dependencies();
+	/**
+	 * Define the core functionality of the plugin.
+	 *
+	 * Set the plugin name and the plugin version that can be used throughout the plugin.
+	 * Load the dependencies, define the locale, and set the hooks for the admin area and
+	 * the public-facing side of the site.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @param CABP_Resource_List_Loader $loader
+	 * @param CABP_Resource_List_i18n $i_18_n
+	 * @param CABP_Resource_List_Admin $admin
+	 * @param CABP_Resource_List_Public $public
+	 */
+    public function __construct(
+	    CABP_Resource_List_Loader $loader,
+	    CABP_Resource_List_i18n $i_18_n,
+    	CABP_Resource_List_Admin $admin,
+	    CABP_Resource_List_Public $public
+    )
+    {
+	    $this->loader = $loader;
+	    $this->i_18_n = $i_18_n;
+	    $this->admin = $admin;
+	    $this->public = $public;
+
+	    $this->plugin_name = CABP_RESOURCE_LIST_SLUG;
+	    $this->version = CABP_RESOURCE_LIST_VERSION;
+
         $this->set_locale();
-        $this->plugin_admin = new CABP_Resource_List_Admin($this->get_plugin_name(), $this->get_version());
-        $this->plugin_public = new CABP_Resource_List_Public($this->get_plugin_name(), $this->get_version());
         $this->define_admin_hooks();
         $this->define_public_hooks();
-    }
-
-    /**
-     * Load the required dependencies for this plugin.
-     *
-     * Include the following files that make up the plugin:
-     *
-     * - CABP_Resource_List_Loader. Orchestrates the hooks of the plugin.
-     * - CABP_Resource_List_i18n. Defines internationalization functionality.
-     * - CABP_Resource_List_Admin. Defines all hooks for the admin area.
-     * - CABP_Resource_List_Public. Defines all hooks for the public side of the site.
-     *
-     * Create an instance of the loader which will be used to register the hooks
-     * with WordPress.
-     *
-     * @since    1.0.0
-     * @access   private
-     */
-    private function load_dependencies()
-    {
-        /**
-         * The class responsible for orchestrating the actions and filters of the
-         * core plugin.
-         */
-//        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/CABP_Resource_List_Loader.php';
-
-        /**
-         * The class responsible for defining internationalization functionality
-         * of the plugin.
-         */
-//        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/CABP_Resource_List_i18n.php';
-
-        /**
-         * The class responsible for defining all actions that occur in the admin area.
-         */
-//        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/CABP_Resource_List_Admin.php';
-
-        /**
-         * The class responsible for defining all actions that occur in the public-facing
-         * side of the site.
-         */
-//        require_once plugin_dir_path(dirname(__FILE__)) . 'public/CABP_Resource_List_Public.php';
-
-        $this->loader = new CABP_Resource_List_Loader();
     }
 
     /**
@@ -156,9 +137,8 @@ class CABP_Resource_List
      */
     private function set_locale()
     {
-        $plugin_i18n = new CABP_Resource_List_i18n();
-        $plugin_i18n->set_domain($this->get_plugin_name());
-        $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
+        $this->i_18_n->set_domain($this->get_plugin_name());
+        $this->loader->add_action('plugins_loaded', $this->i_18_n, 'load_plugin_textdomain');
     }
 
     /**
@@ -170,11 +150,9 @@ class CABP_Resource_List
      */
     private function define_admin_hooks()
     {
-        $plugin_admin = $this->plugin_admin;
-
         // Add settings page.
-	    $this->loader->add_action('admin_menu', $plugin_admin, 'add_admin_page');
-	    $this->loader->add_action('admin_init', $plugin_admin, 'admin_page_init');
+	    $this->loader->add_action('admin_menu', $this->admin, 'add_admin_page');
+	    $this->loader->add_action('admin_init', $this->admin, 'admin_page_init');
     }
 
     /**
@@ -186,22 +164,20 @@ class CABP_Resource_List
      */
     private function define_public_hooks()
     {
-        $plugin_public = $this->plugin_public;
-
 	    // Add endpoint
-	    $this->loader->add_action('init', $plugin_public, 'add_rewrites');
-	    $this->loader->add_action('template_redirect', $plugin_public, 'rewrite_content');
+	    $this->loader->add_action('init', $this->public, 'add_rewrites');
+	    $this->loader->add_action('template_redirect', $this->public, 'rewrite_content');
 
 	    // Enqueue CSS
-	    $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+	    $this->loader->add_action('wp_enqueue_scripts', $this->public, 'enqueue_styles');
 
 	    // Enqueue JS
-	    $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+	    $this->loader->add_action( 'wp_enqueue_scripts', $this->public, 'enqueue_scripts' );
 
 	    // AJAX
 	    if ( is_admin() ) {
-		    $this->loader->add_action( 'wp_ajax_rlist_get_detail', $plugin_public, 'rlist_get_detail' );
-		    $this->loader->add_action( 'wp_ajax_nopriv_rlist_get_detail', $plugin_public, 'rlist_get_detail' );
+		    $this->loader->add_action( 'wp_ajax_rlist_get_detail', $this->public, 'rlist_get_detail' );
+		    $this->loader->add_action( 'wp_ajax_nopriv_rlist_get_detail', $this->public, 'rlist_get_detail' );
 	    }
     }
 

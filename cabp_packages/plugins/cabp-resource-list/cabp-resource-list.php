@@ -35,11 +35,11 @@ define( 'CABP_RESOURCE_LIST_RESOURCE', 'users' );
 define( 'CABP_RESOURCE_LIST_DETAIL', 'albums' );
 define('BASE_PATH', plugin_dir_path(__FILE__));
 
-require BASE_PATH . 'vendor/autoload.php';
-
+use DI\ContainerBuilder;
 use Cabp\ResourceList\CABP_Resource_List_Activator;
 use Cabp\ResourceList\CABP_Resource_List_Deactivator;
-use Cabp\ResourceList\CABP_Resource_List;
+
+require BASE_PATH . 'vendor/autoload.php';
 
 /**
  * Code that runs during plugin activation.
@@ -70,8 +70,19 @@ register_deactivation_hook( __FILE__, 'deactivate_cabp_resource_list' );
  * @since    1.0.0
  */
 function run_cabp_resource_list() {
-	$plugin = new CABP_Resource_List();
-	$plugin->run();
+	// DI
+	try {
+		$containerBuilder = new ContainerBuilder;
+		$containerBuilder->addDefinitions(__DIR__ . '/config.php');
+		$container = $containerBuilder->build();
+
+		$plugin = $container->get('Cabp\ResourceList\CABP_Resource_List');
+		$plugin->run();
+	}
+	catch (\Exception $exception) {
+		echo $exception->getMessage();
+		exit;
+	}
 }
 
 run_cabp_resource_list();
