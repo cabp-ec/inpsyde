@@ -4,10 +4,6 @@
   <a href="LICENSE.md">
     <img alt="MIT License" src="https://img.shields.io/github/license/roots/bedrock?color=%23525ddc&style=flat-square" />
   </a>
-
-  <a href="https://carlos-bucheli.com/repos">
-    <img alt="Build Status" src="https://img.shields.io/circleci/build/gh/roots/bedrock?style=flat-square" />
-  </a>
 </p>
 
 Resource List is a Wordpress Plugin for the Inpsyde coding challenge.
@@ -47,3 +43,40 @@ This plugin requires [PHP](https://php.net/) v7.4.11+ to run.
 ## Usage
 
 Navigate to `/cabp` and you'll see the plugin in action.
+
+
+## Autoloading
+
+The plugin has been updated to use autoloading with Composer:
+
+    autoload": {
+      "psr-4": {
+        "Cabp\\ResourceList\\": "includes",
+        "Cabp\\ResourceList\\Admin\\": "admin",
+        "Cabp\\ResourceList\\_Public\\": "public"
+      }
+    }
+    
+
+## Dependency Injection
+
+This is the first time I use DI with WordPress.
+My first attempt was to use Symfony's DI component, unfortunately
+it didn't work because it's throwing an error about compatibility
+with PSR-11. That happens because PHP Fig already updated the PSR
+interfaces while the [php-psr](https://github.com/jbboehr/php-psr)
+library did not, and that library is required by
+[Phalcon](https://github.com/composer/installers) (which I use frequently).
+Therefore, I decided to use [PHP/DI]() instead, using autowiring and PHP definitions.
+
+## Unit Testing
+
+This is the first time I do unit testing with WordPress, so I wasn't
+sure how this was going to work or what exactly to test.
+The [Brain Monkey](https://giuseppe-mazzapica.gitbook.io/brain-monkey/)
+library have been included in the project, with a basic implementation.
+The library looks and feels nice and easy enough to start with; however,
+—so far, it's failing when using the SP function `flush_rewrite_rules`,
+which I thought was going to be recognized by Brain Monkey.
+I'm further reading about this library in order to sove that issue
+but also implementing more tests.

@@ -21,7 +21,6 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Define.
-define( 'CABP_RESOURCE_LIST_NAME', 'CABP Resource List' );
 define( 'CABP_RESOURCE_LIST_SLUG', 'cabp-resource-list' );
 define( 'CABP_RESOURCE_LIST_SLUG_ADMIN', 'cabp-resource-list-admin' );
 define( 'CABP_RESOURCE_LIST_VERSION', '1.0' );

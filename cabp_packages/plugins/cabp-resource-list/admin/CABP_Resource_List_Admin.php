@@ -60,8 +60,8 @@ class CABP_Resource_List_Admin {
 	 */
 	public function add_admin_page() {
 		add_options_page(
-			CABP_RESOURCE_LIST_NAME,
-			CABP_RESOURCE_LIST_NAME,
+			$this->plugin_name,
+			$this->plugin_name,
 			'manage_options', // capability
 			CABP_RESOURCE_LIST_SLUG, // menu_slug
 			array( $this, 'create_admin_page_callback' ) // function

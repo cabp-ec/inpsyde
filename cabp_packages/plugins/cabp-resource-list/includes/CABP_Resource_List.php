@@ -83,10 +83,12 @@ class CABP_Resource_List
 	 * @var CABP_Resource_List_Admin
 	 */
 	private $admin;
+
 	/**
 	 * @var CABP_Resource_List_Public
 	 */
 	private $public;
+
 	/**
 	 * @var CABP_Resource_List_i18n
 	 */
